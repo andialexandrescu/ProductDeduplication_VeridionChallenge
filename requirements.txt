@@ -1,0 +1,7 @@
+pandas
+fastparquet
+scikit-learn
+numpy
+matplotlib
+thefuzz
+pyarrow
