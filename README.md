@@ -1,1 +1,3 @@
 # ProductDeduplication_VeridionChallenge
+
+I managed to use nlp for product deduplication on columns such as product_name, product_title, product_summary, url_path and root_domain. Used TF-IDF for product_title in order to identify the most significant words for each product title (in order to recognize key features) and combined this metric with cosine similarity applied onto product_name (less technical than product_title) . My question is how can i make this more accurate and use a vector space for semantic similarity
