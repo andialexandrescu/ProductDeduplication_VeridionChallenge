@@ -3,6 +3,9 @@ import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from collections import defaultdict
+import time
+
+start_time = time.time()
 
 # `clean_string_data.ipynb`
 df = pd.read_parquet('data\\veridion_product_deduplication_challenge.snappy.parquet')
@@ -76,6 +79,7 @@ for i, j, similarity in potential_duplicates:
 #     print(f"\tOverall Score: {overall_score:.4f}")
 #     print()
 
+# `group_duplicates_consolidate_groups.ipynb`
 graph = defaultdict(list)
 for i, j, _, _, _ in validated_duplicates:
     graph[i].append(j)
@@ -126,3 +130,7 @@ representatives_df = pd.DataFrame(enriched_entries)
 deduplicated_df = pd.concat([non_duplicates_df, representatives_df], ignore_index=True)
 deduplicated_df.to_parquet('data\\deduplicated_products.parquet', engine='pyarrow')
 print(len(cleaned_df)-len(deduplicated_df))
+
+duration = time.time() - start_time
+minutes, seconds = divmod(duration, 60)
+print(f"{int(minutes)} minutes and {int(seconds)} seconds")
